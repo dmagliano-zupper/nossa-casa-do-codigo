@@ -5,6 +5,7 @@ import br.com.zup.livros.LivrosRequestDto
 data class NovoAutorRequest(
     val nome: String,
     val email: String,
+    val descricao: String,
     val livros: List<LivrosRequestDto>,
 ) {
 
