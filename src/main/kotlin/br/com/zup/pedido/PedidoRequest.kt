@@ -3,6 +3,7 @@ package br.com.zup.pedido
 import br.com.zup.clientes.Cliente
 import io.micronaut.core.annotation.Introspected
 import java.math.BigDecimal
+import javax.validation.Valid
 import javax.validation.constraints.Email
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
@@ -11,7 +12,7 @@ import javax.validation.constraints.Size
 class PedidoRequest(
     @field:NotBlank val nomeCliente: String,
     @field:NotBlank @field:Email val emailCliente: String,
-    @field:Size(min = 1) val itensPedido: List<ItemPedidoRequest>
+    @field:Valid @field:Size(min = 1) val itensPedido: List<ItemPedidoRequest>
 ) {
 
     fun toPedido(): Pedido {
