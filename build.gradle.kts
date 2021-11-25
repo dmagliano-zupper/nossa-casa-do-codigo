@@ -4,6 +4,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.allopen") version "1.5.21"
     id("org.jetbrains.kotlin.plugin.jpa") version "1.5.21"
     id("com.github.johnrengelman.shadow") version "7.1.0"
+    id("org.jetbrains.kotlin.plugin.noarg") version "1.5.21"
     id("io.micronaut.application") version "2.0.8"
 }
 
@@ -36,9 +37,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     runtimeOnly("ch.qos.logback:logback-classic")
-    runtimeOnly("com.h2database:h2")
     implementation("io.micronaut:micronaut-validation")
-
+    implementation("org.postgresql:postgresql:42.2.18")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
 }

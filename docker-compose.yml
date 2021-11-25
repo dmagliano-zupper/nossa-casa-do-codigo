@@ -1,17 +1,16 @@
 services:
   nossa-casa-codigo-db:
-    image: mysql:5.7
+    image: postgres:14
     restart: always
     environment:
-      MYSQL_DATABASE: 'nossa-casa-codigo'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: '123456'
-      MYSQL_ROOT_PASSWORD: 'password'
-      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+      POSTGRES_DATABASE: 'casadocodigokotlin'
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: '123456'
+
     ports:
-      - '3306:3306'
+      - '5432:5432'
     expose:
-      - '3306'
+      - '5432'
     volumes:
       - volume-nossa-casa-codigo:/Projetos/volume-nossa-casa-codigo
 
