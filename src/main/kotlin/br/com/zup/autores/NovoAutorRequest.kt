@@ -8,5 +8,7 @@ data class NovoAutorRequest(
     val descricao: String,
     val livros: List<LivrosRequestDto>,
 ) {
-
+    fun toAutor() = Autor(
+        nome, email, descricao
+    )
 }
