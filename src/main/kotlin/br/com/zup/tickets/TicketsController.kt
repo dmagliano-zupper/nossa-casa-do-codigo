@@ -1,11 +1,15 @@
 package br.com.zup.tickets
 
+import io.micronaut.data.model.Page
+import io.micronaut.data.model.Pageable
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.annotation.*
 import io.micronaut.validation.Validated
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import java.time.LocalDateTime
+import javax.persistence.Converter
 import javax.transaction.Transactional
 import javax.validation.Valid
 
@@ -29,23 +33,16 @@ class TicketsController(val ticketRepository: TicketRepository) {
 
     @Get
     @Transactional
-    fun lista(@QueryValue(defaultValue = "") placa: String): HttpResponse<List<DetalheTicketResponse>> {
+    fun lista(@QueryValue(defaultValue = "") placa: String): HttpResponse<Page<DetalheTicketResponse>> {
 
-        if (placa.isBlank()) {
+        val tickets = ticketRepository.findByPlacaVeiculoAndDataCriacaoAfter(
+            placaVeiculo = placa,
+            dataCriacao = LocalDateTime.of(2021,11,24,0,0,0),
+            Pageable.from(0, 1))
 
-            val tickets = ticketRepository.findAll()
-            val resposta = paraTicketDto(tickets)
-            return HttpResponse.ok(resposta)
-        }
 
-        val tickets = ticketRepository.findByPlacaVeiculoOrderByDataCriacaoDesc(placaVeiculo = placa)
-        val respostaByPlaca = paraTicketDto(tickets)
-        return HttpResponse.ok(respostaByPlaca)
+        return HttpResponse.ok(tickets)
     }
 
-    fun paraTicketDto(ticketList: List<Ticket>): List<DetalheTicketResponse> {
-
-        return ticketList.map { ticket -> DetalheTicketResponse(ticket) }
-    }
 
 }

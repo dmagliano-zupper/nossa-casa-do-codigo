@@ -18,6 +18,14 @@ class Ticket(
     val status: StatusTicketsEnum = StatusTicketsEnum.ABERTO
     val dataCriacao: LocalDateTime = LocalDateTime.now()
 
+    fun toTicketDto() : DetalheTicketResponse {
+        return DetalheTicketResponse(
+            this.titulo,
+            this.descricao,
+            this.status,
+        )
+    }
+
     override fun toString(): String {
         return "Ticket(titulo='$titulo', descricao='$descricao', status=${status.toString()}, dataCriacao=$dataCriacao)"
     }
